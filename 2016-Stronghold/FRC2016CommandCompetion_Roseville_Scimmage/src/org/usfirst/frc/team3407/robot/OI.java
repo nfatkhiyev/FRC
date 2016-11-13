@@ -64,7 +64,7 @@ public class OI {
 	}
     
 
-//This is an acceleration sequence for our autonomous mode
+//This is an acceleration sequence for our autonomous mode.
 	public double AutoFinalSpeed(double value, double acceleration, double cap){
 		if(value < cap) {
 			if(value + acceleration <= cap) {
@@ -84,7 +84,7 @@ public class OI {
 		return value;
 		
 	}
-	//This is an acceleration sequence based off of joystick values for Tele-Op
+	//This is an acceleration sequence based off of joystick values for Tele-Op.
 	//It is similar to the autonomous one but it uses joysticks as cap values and more exceptions.
 	public double finalSpeed(double value,double acceleration, double cap) {
 		//double Ivalue = value;
