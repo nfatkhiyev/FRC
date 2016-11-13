@@ -22,10 +22,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+// Defining our subsystems
 	public static drivetrain drivetrain = new drivetrain();
 	public static Shooter shooter = new Shooter();
-
+//naming various commands and objects
     Command autonomousCommand;
     SendableChooser chooser;
     CameraServer server;
@@ -37,16 +37,16 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		OI.getInstance();
+		OI.getInstance();//Getting the instance created for OI
     	Auto= new AutonomousCommand();
+    	//Camera setup
 		server = CameraServer.getInstance();
         server.setQuality(50);
         server.startAutomaticCapture("cam0");
+        //end camera setup
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-    	//a = JOptionPane.showInputDialog("Enter Double for autoCapSpeed");
-    	//b = JOptionPane.showInputDialog("EnterDouble for Time");
     	OI.getInstance().Start();
     }
 	
@@ -88,7 +88,7 @@ public class Robot extends IterativeRobot {
     	
     	// schedule the autonomous command (example)
         //if (autonomousCommand != null) new AutonomousCommand();
-    	Auto.start();
+    	Auto.start();//starts autonomous command sequence
     }
 
     /**
@@ -104,7 +104,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         //if (autonomousCommand != null) autonomousCommand.cancel();
-    	Auto.cancel();
+    	Auto.cancel();//stops autonomous command sequence
 
     }
 
