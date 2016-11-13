@@ -11,25 +11,41 @@ import org.usfirst.frc.team3407.robot.commands.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	static OI instance;
+	static OI instance;//1st step in creating an instance of this class
 	double multiplier;
 	double driveTime;
 	double autoSpeedCap;
 	private double autoSpeed;
-	
+	//Joystick Setup
 	Joystick rightstick = new Joystick(1);
 	Joystick leftstick = new Joystick(0);
-	Button buttonR1 = new JoystickButton(rightstick, 1),
+	Button buttonR1 = new JoystickButton(rightstick, 1),//Setting up new buttons
 		   buttonR2 = new JoystickButton(rightstick, 2),
 		   buttonL3 = new JoystickButton(leftstick, 3),
 		   buttonL2 = new JoystickButton (leftstick, 2),
 		   buttonL1 = new JoystickButton (leftstick,1),
 		   buttonR3 = new JoystickButton (rightstick, 3);
+	//creating names for variables used in speed equations
 	private double rightSpeedCap,leftSpeedCap;
 	private double speedRight,speedLeft;
 	
 	public OI(){
-		
+		//Here  we assign buttons to commands based on their actions
+	    //// TRIGGERING COMMANDS WITH BUTTONS
+	    // Once you have a button, it's trivial to bind it to a button in one of
+	    // three ways:
+	    
+	    // Start the command when the button is pressed and let it run the command
+	    // until it is finished as determined by it's isFinished method.
+	    // button.whenPressed(new ExampleCommand());
+	    
+	    // Run the command while the button is being held down and interrupt it once
+	    // the button is released.
+	    // button.whileHeld(new ExampleCommand());
+	    
+	    // Start the command when the button is released  and let it run the command
+	    // until it is finished as determined by it's isFinished method.
+	    // button.whenReleased(new ExampleCommand());
 		buttonR1.whenPressed(new ShootCommand());
 		buttonR2.whenPressed(new HomeCommand());
 		buttonL3.whenPressed(new ArmDownCommand());
@@ -39,38 +55,16 @@ public class OI {
 	}
 	
 	public static OI getInstance(){
+		//creation of a new instance for this class used to update joystick values.
+		//and link this code to the parent class Robot
 		if(instance == null){
 			instance = new OI();	
 		}
 		return instance;
 	}
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
     
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
 
+//This is an acceleration sequence for our autonomous mode
 	public double AutoFinalSpeed(double value, double acceleration, double cap){
 		if(value < cap) {
 			if(value + acceleration <= cap) {
@@ -90,7 +84,8 @@ public class OI {
 		return value;
 		
 	}
-	
+	//This is an acceleration sequence based off of joystick values for Tele-Op
+	//It is similar to the autonomous one but it uses joysticks as cap values and more exceptions.
 	public double finalSpeed(double value,double acceleration, double cap) {
 		//double Ivalue = value;
 		//double Iacceleration = acceleration;
@@ -125,6 +120,7 @@ public class OI {
 	}
 
 	public void Start() {
+		//reset method for variables runs once at beginning
 		speedRight = 0;
 		speedLeft = 0;
 		autoSpeed = 0;
@@ -133,7 +129,7 @@ public class OI {
 		//autoSpeedCap =(Double.parseDouble (Robot.a));
 		//driveTime = (Double.parseDouble(Robot.b));
 	}
-	
+	//The update meathod is run once every frame and is called in the Robot parent class.
 	public void Update() {
 		rightSpeedCap = rightstick.getRawAxis(1);
         leftSpeedCap = leftstick.getRawAxis(1);
@@ -146,7 +142,7 @@ public class OI {
         
        // System.out.println(speedLeft * .5 + ", " + speedRight * .5 + "," + System.currentTimeMillis());
 	}
-
+//getters and setters fo multiple variables such as joysticks and speeds.
 	public Joystick getRightJoystick() {
 		return rightstick;
 	}
@@ -177,6 +173,7 @@ public class OI {
 	public double getMultiplier() {
 		return multiplier;
 	}
+	//DOCUMENTATION of OLD CODE
 	/*public double getSpeedLeft() {
 	return speedLeft;
 	}*/
