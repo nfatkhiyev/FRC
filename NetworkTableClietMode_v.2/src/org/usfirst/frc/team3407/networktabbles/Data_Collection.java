@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3407.networktabbles;
+package org.usfirst.frc.team3407.networktables;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
