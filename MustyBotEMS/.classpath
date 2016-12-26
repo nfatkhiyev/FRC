@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/TwxxEdge"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/wplib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/wpilib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/TwxEdge"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

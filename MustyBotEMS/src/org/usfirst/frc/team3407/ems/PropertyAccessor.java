@@ -16,10 +16,12 @@ import edu.wpi.first.wpilibj.tables.ITable;
 public abstract class PropertyAccessor {
 	
 	private String name;
+	private String propertyName;
 	private String description;
 	
 	public PropertyAccessor(String name, String description) {
 		this.name = name;
+		this.propertyName = name.replace(' ', '_');
 		this.description = description;
 	}
 	
@@ -29,6 +31,10 @@ public abstract class PropertyAccessor {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPropertyName() {
+		return propertyName;
 	}
 
 	public String getDescription() {
@@ -44,10 +50,10 @@ public abstract class PropertyAccessor {
 			throws Exception;
 
 	PropertyDefinition getDefinition() {
-		PropertyDefinition propertyDef = new PropertyDefinition(getName(), 
+		PropertyDefinition propertyDef = new PropertyDefinition(getPropertyName(), 
 				getDescription(), getType());
 		
-		//Create an aspect collection to hold all of the different aspects 
+		//Create an aspect collection to hold all of the different y 
 		AspectCollection aspects = new AspectCollection();
 		
 		//Add the dataChangeType aspect 

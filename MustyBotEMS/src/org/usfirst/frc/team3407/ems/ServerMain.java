@@ -17,7 +17,7 @@ public class ServerMain extends ConnectedThingClient {
 	
 	private static final String TABLE_NAME = "RobotData";
 	
-	private static String APP_KEY = "6b12eada-78b0-4742-a79c-cd4be0b01246";
+	private static String APP_KEY = "5a788559-ff94-4f2e-8818-70e5072e3107";
 
 	public ServerMain(ClientConfigurator config) throws Exception {
 		super(config);
@@ -67,8 +67,10 @@ public class ServerMain extends ConnectedThingClient {
 				accessors.add(new NumberPropertyAccessor("Solenoid B Counter", -1));
 				accessors.add(new NumberPropertyAccessor("Solenoid X Counter", -1));
 				accessors.add(new NumberPropertyAccessor("Solenoid Y Counter", -1));
-				NetworkTableThing tableThing = new NetworkTableThing(TABLE_NAME, 
-						server, accessors); 
+				NetworkTable table = NetworkTable.getTable(TABLE_NAME);
+				LOG.debug("NetworkTable: connected=" + table.isConnected());
+				NetworkTableThing tableThing = new NetworkTableThing(TABLE_NAME, TABLE_NAME,
+						server, table.isConnected() ? table : new SimulatedTable(1234), accessors); 
 				server.bindThing(tableThing);
 				
 				// This will prevent the main thread from exiting. It will be up to another thread

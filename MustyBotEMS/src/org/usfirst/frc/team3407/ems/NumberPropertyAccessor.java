@@ -40,6 +40,6 @@ public class NumberPropertyAccessor extends PropertyAccessor {
 			LOGGER.debug("updateProperty() name=" + name + " value=" + value);
 		}
 
-		thing.setPropertyValue(name, new NumberPrimitive(value));		
+		thing.setPropertyValue(getPropertyName(), new NumberPrimitive(value));		
 	}
 }
