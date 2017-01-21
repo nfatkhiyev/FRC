@@ -19,6 +19,70 @@ public class SimulatedTable implements ITable {
 		random = new Random(seed);
 	}
 	
+	
+	@Override
+	public boolean setDefaultNumber(String key, double defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultString(String key, String defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultBoolean(String key, boolean defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultBooleanArray(String key, boolean[] defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultBooleanArray(String key, Boolean[] defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultNumberArray(String key, double[] defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultNumberArray(String key, Double[] defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultStringArray(String key, String[] defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean setDefaultRaw(String key, byte[] defaultValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 	@Override
 	public boolean containsKey(String key) {
 		// TODO Auto-generated method stub
