@@ -13,6 +13,14 @@ import org.usfirst.frc.team3407.vision.BoilerPipeline;
 import org.usfirst.frc.team3407.vision.GripPipeline;
 
 public class Tester {
+	
+	private static final int[][] BOILER_IMAGES = {
+			{ 4, 2 },
+			{ 10, 4 },
+			{ 12, 7 },
+			{ 11, 3 }
+	};
+	
 	public static void main(String[] args) {
 			    
 		String imageFileName = args[0];
@@ -23,7 +31,9 @@ public class Tester {
 		File file = new File(args[0]);
 		if(file.exists()) {
 			if(file.isDirectory()) {
-				runImages(args[0], 3, 11, 3);
+				int angle = (args.length > 1) ? Integer.parseInt(args[1]) : 0;
+				int[] distances = BOILER_IMAGES[angle];
+				runImages(args[0], angle, distances[0], distances[1]);
 			}
 			else {
 				runImage(args[0]);

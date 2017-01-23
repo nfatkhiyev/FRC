@@ -13,11 +13,11 @@ import org.opencv.imgproc.Imgproc;
  */
 public class BoilerPipeline extends GripPipeline {
 
-	private static final double HEIGHT_RATIO = 1.25;
+	private static final double HEIGHT_RATIO = 1.25d;
 
-	private static final int X_MATCH_THRESHOLD = 5;
-	private static final int WIDTH_MATCH_THRESHOLD = 10;
-	private static final double HEIGHT_RATIO_MATCH_THRESHOLD = 0.1;
+	private static final int X_MATCH_THRESHOLD = 15;
+	private static final int WIDTH_MATCH_THRESHOLD = 15;
+	private static final double HEIGHT_RATIO_MATCH_THRESHOLD = 0.25d;
 
 	@Override
 	protected double[] getHslThresholdHue() {
@@ -42,24 +42,38 @@ public class BoilerPipeline extends GripPipeline {
 		ArrayList<MatOfPoint> contours = filterContoursOutput();
 		int contourCount = contours.size();
 
-		if (contourCount == 2) {
-			Rect upper = Imgproc.boundingRect(contours.get(0));
-			Rect lower = Imgproc.boundingRect(contours.get(1));
-			if (upper.y > lower.y) {
-				// Swap
-				Rect temp = upper;
-				upper = lower;
-				lower = temp;
+		Rect upper = null;
+		Rect lower = null;
+		for(int i = 0;(i < (contourCount - 1)) && (upper == null);i++) {
+			Rect rectI = Imgproc.boundingRect(contours.get(i));
+			for(int j = (i + 1);j < contourCount;j++) {
+				Rect rectJ = Imgproc.boundingRect(contours.get(j));			
+				if (validateTarget(rectI, rectJ)) {
+					upper = rectI;
+					lower = rectJ;
+					break;
+				}
+				else if (validateTarget(rectJ, rectI)) {
+					upper = rectJ;
+					lower = rectI;
+					break;
+				}
 			}
-			if (validateTarget(upper, lower)) {
-				target = new Rect(upper.x, upper.y, upper.width, lower.height + (lower.y - upper.y));
-			}
+		}
+			
+		if (upper != null) {
+			target = new Rect(upper.x, upper.y, upper.width, lower.height + (lower.y - upper.y));
 		}
 
 		return target;
 	}
 
 	protected boolean validateTarget(Rect upper, Rect lower) {
+		
+		// Check height
+		if(upper.y > lower.y) {
+			return false;
+		}
 
 		int xDiff = Math.abs(upper.x - lower.x);
 		int widthDiff = Math.abs(upper.width - lower.width);
