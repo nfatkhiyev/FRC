@@ -12,6 +12,8 @@ import org.opencv.imgproc.*;
 */
 public abstract class GripPipeline  {
 
+	private Mat	source;
+	
 	//Outputs
 	private Mat hslThresholdOutput = new Mat();
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
@@ -44,10 +46,23 @@ public abstract class GripPipeline  {
 	
 	public abstract Rect getTarget();
 		
+	public GripPipeline(Mat source) {
+		this.source = source;
+	}
+	
+	public Point getTargetPointFromCenter() {
+		Point centerPoint = new Point(source.width() / 2, source.height() / 2);
+		Rect targetRect = getTarget();
+		Point targetPoint = new Point(targetRect.x + (targetRect.width / 2), 
+				targetRect.y + (targetRect.height / 2));
+		
+		return new Point(targetPoint.x - centerPoint.x, targetPoint.y - centerPoint.y);
+	}
+	
 	/**
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
-	public void processImage(Mat source) {
+	public void processImage() {
 		// Step HSL_Threshold0:
 		hslThreshold(source, getHslThresholdHue(), getHslThresholdSaturation(), getHslThresholdLuminance(), hslThresholdOutput);
 

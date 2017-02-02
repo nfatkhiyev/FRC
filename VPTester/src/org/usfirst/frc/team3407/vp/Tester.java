@@ -61,12 +61,12 @@ public class Tester {
 	
 	public static void runImage(String imageFileName) {
 
-		GripPipeline pipeline = new BoilerPipeline();
-
 		Mat image = Imgcodecs.imread(imageFileName);
 		System.out.println("width=" + image.width() + " height=" + image.height());
+
+		GripPipeline pipeline = new BoilerPipeline(image);
 		
-		pipeline.processImage(image);
+		pipeline.processImage();
 		
 		//Imgcodecs.imwrite("C:\temp\test_hsl.jpeg", pipeline.hslThresholdOutput());
 				
@@ -80,6 +80,7 @@ public class Tester {
 					" area=" + (rect.height * rect.width));
 		}
 
-		System.out.println("Target Rectange: " + pipeline.getTarget());
+		System.out.println("Target Rectange: " + pipeline.getTarget() + 
+				" targetFromCenter=" + pipeline.getTargetPointFromCenter());
 	}
 }
