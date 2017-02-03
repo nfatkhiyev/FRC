@@ -3,6 +3,7 @@ package org.usfirst.frc.team3407.vp;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
@@ -14,6 +15,10 @@ import org.usfirst.frc.team3407.vision.GripPipeline;
 
 public class Tester {
 	
+	static {
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	}
+
 	private static final int[][] BOILER_IMAGES = {
 			{ 4, 2 },
 			{ 10, 4 },
@@ -80,7 +85,9 @@ public class Tester {
 					" area=" + (rect.height * rect.width));
 		}
 
-		System.out.println("Target Rectange: " + pipeline.getTarget() + 
-				" targetFromCenter=" + pipeline.getTargetPointFromCenter());
+		Rect target = pipeline.getTarget();
+		System.out.println("Target Rectangle: " + target + 
+				" targetArea=" + target.area() + 
+				" fromCenter=" + pipeline.getTargetPointFromCenter());
 	}
 }
