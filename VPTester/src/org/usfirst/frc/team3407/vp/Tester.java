@@ -86,8 +86,13 @@ public class Tester {
 		}
 
 		Rect target = pipeline.getTarget();
-		System.out.println("Target Rectangle: " + target + 
-				" targetArea=" + target.area() + 
-				" fromCenter=" + pipeline.getTargetPointFromCenter());
+		if(target == null) {
+			System.out.println("No target identified");
+		}
+		else {
+			System.out.println("Target Rectangle: " + target + 
+					" targetArea=" + target.area() + 
+					" fromCenter=" + pipeline.getTargetPointFromCenter());
+		}
 	}
 }
