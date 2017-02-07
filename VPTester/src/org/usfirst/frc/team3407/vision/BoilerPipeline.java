@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3407.vision;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -22,21 +21,6 @@ public class BoilerPipeline extends GripPipeline {
 
 	public BoilerPipeline(Mat source) {
 		super(source);
-	}
-
-	@Override
-	protected double[] getHslThresholdHue() {
-		return new double[] { 47.0, 98.0 };
-	}
-
-	@Override
-	protected double[] getHslThresholdSaturation() {
-		return new double[] { 126.0, 255.0 };
-	}
-
-	@Override
-	protected double[] getHslThresholdLuminance() {
-		return new double[] { 19.0, 155.0 };
 	}
 
 	@Override

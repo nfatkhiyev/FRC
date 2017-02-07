@@ -31,9 +31,9 @@ public class Tester {
 		String imageFileName = args[0];
 		
 		System.out.println("Vision Processing Tester");
-		System.out.println("Processing: " + args[0]);
+		System.out.println("Processing: " + imageFileName);
 
-		File file = new File(args[0]);
+		File file = new File(imageFileName);
 		if(file.exists()) {
 			if(file.isDirectory()) {
 				int angle = (args.length > 1) ? Integer.parseInt(args[1]) : 0;

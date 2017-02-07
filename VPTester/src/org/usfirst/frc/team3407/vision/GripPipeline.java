@@ -40,9 +40,17 @@ public abstract class GripPipeline  {
 	private double filterContoursMaxRatio = 100000.0;
 
 	// HSL Thresholds
-	protected abstract double[] getHslThresholdHue();
-	protected abstract double[] getHslThresholdSaturation();
-	protected abstract double[] getHslThresholdLuminance();
+	protected double[] getHslThresholdHue() {
+		return new double[] { 47.0, 98.0 };
+	}
+
+	protected double[] getHslThresholdSaturation() {
+		return new double[] { 126.0, 255.0 };
+	}
+
+	protected double[] getHslThresholdLuminance() {
+		return new double[] { 19.0, 155.0 };
+	}
 	
 	public abstract Rect getTarget();
 		
